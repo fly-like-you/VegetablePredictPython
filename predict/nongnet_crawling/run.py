@@ -1,8 +1,11 @@
 import time
 from selenium import webdriver
-from predict.nongnet_crawling.VegetableDataDownloader import VegetableDataDownloader
-import os
+from predict.nongnet_crawling.utils.VegetableDataDownloader import VegetableDataDownloader
+from predict.nongnet_crawling.utils.PriceJsonParser import PriceJsonParser
+
+
 destination_path = 'C:\\Users\\Parkjunho\\PycharmProjects\\USG_Dacon_Contest\\vegetable\\predict\\price_predict\\vegetable_price\\original_vegetable_csv'
+
 title_table = [" 거래물량 정보.csv", " 평균가격 정보.csv"]
 vegetable_table = ['토마토(일반)', '양파(일반)', '파프리카(일반)', '시금치(일반)', '깻잎(일반)', '청양', '풋고추(전체)', '미나리(일반)']
 
@@ -44,4 +47,10 @@ if __name__ == '__main__':
         downloader = VegetableDataDownloader(driver, vege)
         downloader.do_download()
 
-    driver.quit()
+    driver.quit()  # 셀레니움 크롤링 종료
+
+    csv_path = '../price_predict/vegetable_price/original_vegetable_csv/'
+    json_parser = PriceJsonParser(csv_path)
+    json_parser.parse_csv_to_json()
+
+
