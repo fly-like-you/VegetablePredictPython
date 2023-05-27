@@ -1,8 +1,8 @@
 import time
 from selenium import webdriver
 from predict.nongnet_crawling.VegetableDataDownloader import VegetableDataDownloader
-
-destination_path = '/predict/vegetable_price/original_vegetable_csv'
+import os
+destination_path = 'C:\\Users\\Parkjunho\\PycharmProjects\\USG_Dacon_Contest\\vegetable\\predict\\price_predict\\vegetable_price\\original_vegetable_csv'
 title_table = [" 거래물량 정보.csv", " 평균가격 정보.csv"]
 vegetable_table = ['토마토(일반)', '양파(일반)', '파프리카(일반)', '시금치(일반)', '깻잎(일반)', '청양', '풋고추(전체)', '미나리(일반)']
 
@@ -28,7 +28,6 @@ def setting_chrome_options():
 
 
 if __name__ == '__main__':
-
     # Selenium 웹 드라이버 경로
     webdriver_path = 'chromedriver_win32/chromedriver.exe'
     nongnet_url = 'https://www.nongnet.or.kr/front/M000000049/content/view.do'

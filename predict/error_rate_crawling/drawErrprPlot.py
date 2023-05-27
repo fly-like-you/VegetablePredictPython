@@ -1,9 +1,8 @@
-import pickle
-
+import json
 import matplotlib.pyplot as plt
 from crawlingSite import crawl_vegetable_price, get_after_date
 from datetime import date
-
+from datetime import datetime
 # 에러 코드
 def create_error_rate_dict(data_dict):
     error_rate_dict = {}
@@ -34,15 +33,15 @@ def get_today():
     return today.strftime("%Y-%m-%d")
 
 if '__main__' == __name__:
-    today = get_today()
+    date = get_today()
+    date = "2023-05-27"
     # 해당 사이트에서 오늘 농산물의 가격은 제공되지않음 (하루 지나야 알 수 있음)
-    date_dict = crawl_vegetable_price(get_after_date(today, -8), today)
+    date_dict = crawl_vegetable_price(get_after_date(date, -8), date)
     error_rate_dict = create_error_rate_dict(date_dict)
 
     # 데이터를 파일에 저장
-    with open('data1.pickle', 'wb') as f:
-
-        pickle.dump(date_dict, f)
+    with open(f'../data/othSite_prediction_from_{date}.json', 'w') as f:
+        json.dump(date_dict, f)
 
     # 그래프 그리기
     x_values = list(range(1, 8))

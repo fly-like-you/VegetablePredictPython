@@ -1,6 +1,7 @@
 from ML_classes import *
 from datetime import timedelta
-
+import json
+from datetime import datetime
 def run():
     # 크롤링한 데이터 가져오기
     original_path = './vegetable_price/original_vegetable_csv/'
@@ -106,15 +107,16 @@ def run():
     y = [day1[6], day2[6], day3[6], day4[6], day5[6], day6[6], day7[6]]
     u = [day1[7], day2[7], day3[7], day4[7], day5[7], day6[7], day7[7]]
     models = dict(zip(['청양고추', '시금치', '토마토', '파프리카', '깻잎', '미나리', '양파', '풋고추'], [c, s, t, p, g, m, y, u]))
-    def method(model):
-        if model in models.keys():
-            return models[model]
-    print(models)
-    print(method('청양고추'))
-    print(method('시금치'))
-    print(method('토마토'))
-    print(method('파프리카'))
-    print(method('깻잎'))
-    print(method('미나리'))
-    print(method('양파'))
-    print(method('풋고추'))
+
+    # 오늘 날짜를 yyyy-mm-dd 형식의 문자열로 변환
+    today = datetime.today().strftime('%Y-%m-%d')
+
+    # JSON 파일 이름 설정
+    filename = f"predict_from_{today}.json"
+
+    # 딕셔너리를 JSON으로 변환하고 파일로 저장
+    with open("../data/" + filename, 'w') as f:
+        json.dump(models, f)
+
+if __name__ == '__main__':
+    run()
